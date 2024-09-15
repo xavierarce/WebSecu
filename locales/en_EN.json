@@ -1,0 +1,17 @@
+{
+  "title": "Welcome to your own journey",
+  "go_to_welcome": "Go to Welcome Page",
+  "welcome-page": {
+    "title": "Welcome to your own journey",
+    "punchline": "Track your personal bests!",
+    "get_started": "Get Started",
+    "already_have_account": "Already have an account!",
+    "login": "Login",
+    "sign_up": "Sign Up"
+  },
+  "login-page": {
+    "hey": "Hey !",
+    "welcome": "Welcome Back",
+    "please_login": "Please login to continue"
+  }
+}
