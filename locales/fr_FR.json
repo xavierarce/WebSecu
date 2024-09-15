@@ -1,0 +1,17 @@
+{
+  "title": "Bienvenue dans votre propre voyage",
+  "go_to_welcome": "Aller à la page de bienvenue",
+  "welcome-page": {
+    "title": "Bienvenue dans votre propre voyage",
+    "punchline": "Suivez vos meilleures performances personnelles !",
+    "get_started": "Commencer",
+    "already_have_account": "Vous avez déjà un compte !",
+    "login": "Connexion",
+    "sign_up": "S'inscrire"
+  },
+  "login-page": {
+    "hey": "Salut",
+    "welcome": "Bon retour",
+    "please_login": "Veuillez vous connecter pour continuer"
+  }
+}
