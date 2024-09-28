@@ -1,0 +1,17 @@
+{
+  "title": "Bienvenido a tu propio viaje",
+  "go_to_welcome": "Ir a la página de bienvenida",
+  "welcome-page": {
+    "title": "Bienvenido a tu propio viaje",
+    "punchline": "¡Registra tus mejores marcas personales!",
+    "get_started": "Comienza",
+    "already_have_account": "¿Ya tienes una cuenta?",
+    "login": "Iniciar sesión",
+    "sign_up": "Regístrate"
+  },
+  "login-page": {
+    "hey": "Hola !",
+    "welcome": "Bienvenido de nuevo",
+    "please_login": "Por favor, inicia sesión para continuar"
+  }
+}
