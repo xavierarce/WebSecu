@@ -12,6 +12,37 @@
   "login-page": {
     "hey": "Hey !",
     "welcome": "Welcome Back",
-    "please_login": "Please login to continue"
+    "please_login": "Please login to continue",
+    "form": {
+      "email": "Enter your email",
+      "password": "Enter your password",
+      "login": "Login",
+      "forgot_password": "Forgot Password"
+    },
+    "errors": {
+      "missing_fields": "Please fill in all the fields"
+    },
+    "footer": {
+      "dont_have_account": "I don't have an account?",
+      "sign_up": "Sign Up"
+    }
+  },
+  "sign-up-page": {
+    "hey": "Hey !",
+    "welcome": "Welcome",
+    "please_sign_up": "Please sign up to continue",
+    "form": {
+      "name": "Enter your name",
+      "email": "Enter your email",
+      "password": "Enter your password",
+      "sign_up": "Sign Up"
+    },
+    "errors": {
+      "missing_fields": "Please fill in all the fields"
+    },
+    "footer": {
+      "already_have_account": "Already have an account?",
+      "login": "Login"
+    }
   }
 }

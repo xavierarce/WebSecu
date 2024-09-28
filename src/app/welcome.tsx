@@ -27,7 +27,10 @@ const Welcome = () => {
           <Text style={styles.punchline}>{t(`${tradKey}.punchline`)}</Text>
         </View>
         <View style={styles.footer}>
-          <Button title={t("welcome-page.get_started")} onPress={() => {}} />
+          <Button
+            title={t("welcome-page.get_started")}
+            onPress={() => router.push("signup" as any)}
+          />
         </View>
         <View style={styles.buttomTextContiner}>
           <Text style={styles.loginText}>
