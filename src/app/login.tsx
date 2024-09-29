@@ -11,19 +11,31 @@ import Input from "../components/Input/Input";
 import Icon from "@/assets/icons";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Button from "../components/Button/Button";
+import { supabase } from "../lib/supabase";
 
 const Login = () => {
   const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!email || !password) {
       Alert.alert(t("login-page.hey"), t("login-page.errors.missing_fields"));
       return;
     }
-    console.log(email, password);
+
+    let localEmail = email.trim();
+    setIsLoading(true);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: localEmail,
+      password: password,
+    });
+
+    console.log(error, "error");
+    if (error) Alert.alert("Login", error.message);
+    setIsLoading(false);
   };
 
   return (
@@ -60,7 +72,7 @@ const Login = () => {
             </Text>
             <Button
               title={t("login-page.form.login")}
-              loading={loading}
+              loading={isLoading}
               onPress={onSubmit}
             />
           </View>

@@ -11,23 +11,55 @@ import Input from "../components/Input/Input";
 import Icon from "@/assets/icons";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Button from "../components/Button/Button";
+import { supabase } from "../lib/supabase";
 
 const SingUp = () => {
   const { t } = useTranslation();
-  const [name, setName] = useState("");
+  const [name, setName] = useState({
+    first_name: "",
+    last_name: "",
+  });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = () => {
-    if (!email || !password || !name) {
+  const onSubmit = async () => {
+    if (!email || !password || !name.first_name || !name.last_name) {
       Alert.alert(
         t("sign-up-page.hey"),
         t("sign-up-page.errors.missing_fields")
       );
       return;
     }
-    console.log(email, password, name);
+
+    let local_first_name = name.first_name.trim();
+    let local_last_name = name.last_name.trim();
+    let localEmail = email.trim();
+    setIsLoading(true);
+
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: localEmail,
+      password: password,
+      options: {
+        data: {
+          first_name: local_first_name,
+          last_name: local_last_name,
+        },
+      },
+    });
+
+    if (error) Alert.alert("SingUp", error.message);
+    setIsLoading(false);
+  };
+
+  const setFirstName = (e: string) => {
+    setName({ ...name, first_name: e });
+  };
+  const setLastName = (e: string) => {
+    setName({ ...name, last_name: e });
   };
 
   return (
@@ -44,13 +76,23 @@ const SingUp = () => {
 
           <View style={styles.form}>
             <Text>{t("sign-up-page.please_sign_up")}</Text>
-            <Input
-              icon={
-                <Icon name="user" size={26} strokeWidth={1.6} color="black" />
-              }
-              placeholder={t("sign-up-page.form.name")}
-              onChangeText={(e) => setName(e)}
-            />
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Input
+                icon={
+                  <Icon name="user" size={26} strokeWidth={1.6} color="black" />
+                }
+                containerStyles={{ flex: 1, marginRight: 10 }}
+                placeholder={t("sign-up-page.form.first_name")}
+                onChangeText={(e) => setFirstName(e)}
+              />
+              <Input
+                containerStyles={{ flex: 1 }}
+                placeholder={t("sign-up-page.form.last_name")}
+                onChangeText={(e) => setLastName(e)}
+              />
+            </View>
             <Input
               icon={
                 <Icon name="mail" size={26} strokeWidth={1.6} color="black" />
@@ -68,7 +110,7 @@ const SingUp = () => {
             />
             <Button
               title={t("sign-up-page.form.sign_up")}
-              loading={loading}
+              loading={isLoading}
               onPress={onSubmit}
             />
           </View>
