@@ -10,8 +10,39 @@
     "sign_up": "S'inscrire"
   },
   "login-page": {
-    "hey": "Salut",
+    "hey": "Salut !",
     "welcome": "Bon retour",
-    "please_login": "Veuillez vous connecter pour continuer"
+    "please_login": "Veuillez vous connecter pour continuer",
+    "form": {
+      "email": "Entrez votre e-mail",
+      "password": "Entrez votre mot de passe",
+      "login": "Connexion",
+      "forgot_password": "Mot de passe oublié ?"
+    },
+    "errors": {
+      "missing_fields": "Veuillez remplir tous les champs"
+    },
+    "footer": {
+      "dont_have_account": "Vous n'avez pas de compte ?",
+      "sign_up": "S'inscrire"
+    }
+  },
+  "sign-up-page": {
+    "hey": "Salut !",
+    "welcome": "Bienvenue",
+    "please_sign_up": "Veuillez vous inscrire pour continuer",
+    "form": {
+      "name": "Entrez votre nom",
+      "email": "Entrez votre e-mail",
+      "password": "Entrez votre mot de passe",
+      "sign_up": "S'inscrire"
+    },
+    "errors": {
+      "missing_fields": "Veuillez remplir tous les champs"
+    },
+    "footer": {
+      "already_have_account": "Vous avez déjà un compte ?",
+      "login": "Connexion"
+    }
   }
 }
