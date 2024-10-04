@@ -37,22 +37,28 @@ const SingUp = () => {
     let localEmail = email.trim();
     setIsLoading(true);
 
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signUp({
-      email: localEmail,
-      password: password,
-      options: {
-        data: {
-          first_name: local_first_name,
-          last_name: local_last_name,
+    try {
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.signUp({
+        email: localEmail,
+        password: password,
+        options: {
+          data: {
+            first_name: local_first_name,
+            last_name: local_last_name,
+            email: localEmail,
+          },
         },
-      },
-    });
+      });
 
-    if (error) Alert.alert("SingUp", error.message);
-    setIsLoading(false);
+      if (error) Alert.alert("SingUp", error.message);
+      setIsLoading(false);
+    } catch (error) {
+      Alert.alert("SingUp", `${(error as Error).message} - 500`);
+      setIsLoading(false);
+    }
   };
 
   const setFirstName = (e: string) => {

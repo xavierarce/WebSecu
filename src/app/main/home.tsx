@@ -1,7 +1,7 @@
 import { Alert, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import ScreenWrapper from "@/src/components/ScreenWrapper";
-import { Button } from "@rneui/themed";
+import Button from "@/src/components/Button/Button";
 import { useAuthContext } from "@/src/context/AuthContext";
 import { supabase } from "@/src/lib/supabase";
 
