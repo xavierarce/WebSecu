@@ -13,11 +13,7 @@ export interface IconProps {
 }
 
 const Icon: React.FC<IconProps> = ({ name, ...props }) => {
-  console.log(name, "name");
-
   const IconComponent = icons[name];
-
-  console.log(IconComponent, "IconComponent");
 
   return (
     <IconComponent

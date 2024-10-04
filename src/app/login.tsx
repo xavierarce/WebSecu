@@ -27,14 +27,17 @@ const Login = () => {
 
     let localEmail = email.trim();
     setIsLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: localEmail,
+        password: password,
+      });
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email: localEmail,
-      password: password,
-    });
+      if (error) Alert.alert("Login", error.message);
+    } catch (error) {
+      Alert.alert("Login", `${(error as Error).message} - 500`);
+    }
 
-    console.log(error, "error");
-    if (error) Alert.alert("Login", error.message);
     setIsLoading(false);
   };
 
