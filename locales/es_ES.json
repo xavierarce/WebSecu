@@ -10,8 +10,39 @@
     "sign_up": "Regístrate"
   },
   "login-page": {
-    "hey": "Hola !",
+    "hey": "¡Hola!",
     "welcome": "Bienvenido de nuevo",
-    "please_login": "Por favor, inicia sesión para continuar"
+    "please_login": "Por favor, inicia sesión para continuar",
+    "form": {
+      "email": "Introduce tu correo electrónico",
+      "password": "Introduce tu contraseña",
+      "login": "Iniciar sesión",
+      "forgot_password": "¿Olvidaste tu contraseña?"
+    },
+    "errors": {
+      "missing_fields": "Por favor, completa todos los campos"
+    },
+    "footer": {
+      "dont_have_account": "¿No tienes una cuenta?",
+      "sign_up": "Regístrate"
+    }
+  },
+  "sign-up-page": {
+    "hey": "¡Hola!",
+    "welcome": "Bienvenido",
+    "please_sign_up": "Por favor, regístrate para continuar",
+    "form": {
+      "name": "Introduce tu nombre",
+      "email": "Introduce tu correo electrónico",
+      "password": "Introduce tu contraseña",
+      "sign_up": "Regístrate"
+    },
+    "errors": {
+      "missing_fields": "Por favor, completa todos los campos"
+    },
+    "footer": {
+      "already_have_account": "¿Ya tienes una cuenta?",
+      "login": "Iniciar sesión"
+    }
   }
 }
