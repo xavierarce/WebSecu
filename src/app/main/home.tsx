@@ -4,24 +4,48 @@ import ScreenWrapper from "@/src/components/ScreenWrapper";
 import Button from "@/src/components/Button/Button";
 import { useAuthContext } from "@/src/context/AuthContext";
 import { supabase } from "@/src/lib/supabase";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  NavigationContainer,
+  useNavigationState,
+} from "@react-navigation/native";
+import Icon from "@/assets/icons";
+import { ProfileTab } from "@/src/components/ProfileSection/ProfileTab";
+
+const Tab = createBottomTabNavigator();
+
+const SmallComponent = ({ text }: { text: string }) => (
+  <View>
+    <Text>{text}</Text>
+  </View>
+);
+
+const HomeScreen = () => <SmallComponent text="Home Screen" />;
+const ProfileScreen = () => <ProfileTab />;
 
 const Home = () => {
-  const { setAuth } = useAuthContext();
-
-  const onLogout = async () => {
-    setAuth(null);
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      Alert.alert("Error logging out", error.message);
-    }
-  };
-
   return (
     <ScreenWrapper>
-      <View>
-        <Text>This is Home </Text>
-        <Button title="Logout" onPress={onLogout} />
-      </View>
+      <NavigationContainer independent>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              headerShown: false,
+              tabBarIcon: () => <Icon name="home" size={24} color="black" />,
+            }}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={ProfileScreen}
+            options={{
+              headerShown: false,
+              tabBarIcon: () => <Icon name="user" size={24} color="black" />,
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
     </ScreenWrapper>
   );
 };
