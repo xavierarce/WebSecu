@@ -11,9 +11,16 @@ import { supabase } from "@/src/lib/supabase"; // Ensure this path is correct
 import { useAuthContext } from "@/src/context/AuthContext"; // Ensure you have this context set up
 import { ProfileHeader } from "./ProfileHeader"; // Ensure this path is correct
 
-export const ProfileTab = () => {
+interface User {
+  name: string;
+  email: string;
+  address: string;
+  avatarUrl?: string;
+}
+
+export const ProfileTab: React.FC = () => {
   const { setAuth } = useAuthContext(); // Use your Auth context to manage authentication state
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<User>({
     name: "John Doe",
     email: "johndoe@mail.com",
     address: "123 Main St, New York, NY",

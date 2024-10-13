@@ -4,7 +4,7 @@ import { router, Stack } from "expo-router";
 import { AuthProvider, useAuthContext } from "../context/AuthContext";
 import { supabase } from "../lib/supabase";
 
-const _layout = () => {
+const _layout: React.FC = () => {
   return (
     <AuthProvider>
       <MainLayout />
@@ -12,19 +12,29 @@ const _layout = () => {
   );
 };
 
-const MainLayout = () => {
+const MainLayout: React.FC = () => {
   const { setAuth } = useAuthContext();
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) {
-        setAuth(session?.user);
-        router.replace("/main/home");
-      } else {
-        setAuth(null);
-        router.replace("/welcome");
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        if (session) {
+          setAuth({
+            ...session?.user,
+            id: session.user?.id || "",
+            email: session.user?.email || "",
+          });
+          router.replace("/main/home");
+        } else {
+          setAuth(null);
+          router.replace("/welcome");
+        }
       }
-    });
+    );
+
+    return () => {
+      authListener?.subscription?.unsubscribe();
+    };
   }, []);
 
   return (
