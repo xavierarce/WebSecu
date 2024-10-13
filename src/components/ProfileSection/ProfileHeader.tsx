@@ -6,13 +6,20 @@ import Icon from "@/assets/icons";
 import { theme } from "@/src/constants/theme";
 import { hp } from "@/src/helpers/common";
 
-export const ProfileHeader = ({ user = {} }) => {
+interface ProfileHeaderProps {
+  user?: {
+    avatarUrl?: string | null;
+    name?: string;
+  };
+}
+
+export const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user = {} }) => {
   return (
     <View style={styles.container}>
       <View style={{ gap: 15 }}>
         <View style={styles.avatarContainer}>
           <Image
-            source={getSourceService(user.avatarUrl)}
+            source={getSourceService(user.avatarUrl || null)}
             style={[
               styles.avatar,
               { borderColor: "black", borderRadius: theme.radius.xxl },
