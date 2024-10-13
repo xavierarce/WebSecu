@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { router, Stack } from "expo-router";
 import { AuthProvider, useAuthContext } from "../context/AuthContext";
 import { supabase } from "../lib/supabase";
+import { getUserData } from "../services/getUserData";
 
 const _layout: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ const _layout: React.FC = () => {
 };
 
 const MainLayout: React.FC = () => {
-  const { setAuth } = useAuthContext();
+  const { setAuth, setUserData } = useAuthContext();
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
@@ -24,6 +25,7 @@ const MainLayout: React.FC = () => {
             id: session.user?.id || "",
             email: session.user?.email || "",
           });
+          updateUserData(session.user);
           router.replace("/main/home");
         } else {
           setAuth(null);
@@ -36,6 +38,13 @@ const MainLayout: React.FC = () => {
       authListener?.subscription?.unsubscribe();
     };
   }, []);
+
+  const updateUserData = async (user: { id: string }) => {
+    const { success, message, data } = await getUserData(user.id);
+
+    if (success) setUserData(data);
+    if (!success) Alert.alert("Error", message);
+  };
 
   return (
     <Stack
