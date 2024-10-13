@@ -3,18 +3,23 @@ import React from "react";
 import { router } from "expo-router";
 import ScreenWrapper from "../components/ScreenWrapper";
 import { useTranslation } from "react-i18next";
-import "../../services/i18next";
+import "../services/i18next";
+import Loading from "../components/Loading/Loading";
 
 const Index = () => {
   const { t } = useTranslation();
 
   return (
     <ScreenWrapper>
-      <Text>{t("title")}</Text>
-      <Button
-        title={t("go_to_welcome")}
-        onPress={() => router.push("welcome" as any)}
-      />
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Loading />
+      </View>
     </ScreenWrapper>
   );
 };

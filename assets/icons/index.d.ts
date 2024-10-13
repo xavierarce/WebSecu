@@ -3,10 +3,12 @@ import ArrowLeftIcon from "./ArrowLeft";
 import Mail from "./Mail";
 import Lock from "./Lock";
 import User from "./User";
+import EditIcon from "./Edit";
 
 export const icons = {
   home: HomeIcon,
   arrowLeft: ArrowLeftIcon,
+  edit: EditIcon,
   mail: Mail,
   lock: Lock,
   user: User,
