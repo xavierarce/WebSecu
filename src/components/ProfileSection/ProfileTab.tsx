@@ -10,6 +10,8 @@ import React, { useState } from "react";
 import { supabase } from "@/src/lib/supabase"; // Ensure this path is correct
 import { useAuthContext } from "@/src/context/AuthContext"; // Ensure you have this context set up
 import { ProfileHeader } from "./ProfileHeader"; // Ensure this path is correct
+import { useRouter } from "expo-router";
+import { wp } from "@/src/helpers/common";
 
 interface User {
   name: string;
@@ -18,18 +20,24 @@ interface User {
   avatarUrl?: string;
 }
 
+/**
+ * @component
+ * ProfileTab component renders the user's profile information and provides
+ * an option to log out. It utilizes the authentication context to manage
+ * the authentication state and the router for navigation.
+ *
+ * @returns {React.FC} A React functional component that displays the user's profile and a logout button.
+ */
 export const ProfileTab: React.FC = () => {
   const { setAuth } = useAuthContext(); // Use your Auth context to manage authentication state
+  const router = useRouter();
+
   const [user, setUser] = useState<User>({
     name: "John Doe",
     email: "johndoe@mail.com",
     address: "123 Main St, New York, NY",
     // avatarUrl: "https://api.dicebear.com/7.x/lorelei/svg",
   });
-
-  const onEdit = () => {
-    Alert.alert("Edit Profile", "Feature to modify user profile will be here.");
-  };
 
   const onLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -42,17 +50,10 @@ export const ProfileTab: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <ProfileHeader user={user} />
-      <View style={styles.infoContainer}>
-        <Text style={styles.email}>{user.email}</Text>
-        <Text style={styles.address}>{user.address}</Text>
-        <TouchableOpacity style={styles.editButton} onPress={onEdit}>
-          <Text style={styles.editButtonText}>Edit</Text>
-        </TouchableOpacity>
-      </View>
+      <ProfileHeader user={user} router={router} />
 
       {/* Actions Section */}
-      <View style={styles.actionsContainer}>
+      <View>
         <Button title="Logout" onPress={onLogout} />
       </View>
     </View>
@@ -62,8 +63,6 @@ export const ProfileTab: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: "#f9f9f9",
   },
   infoContainer: {
     padding: 20,
@@ -99,8 +98,5 @@ const styles = StyleSheet.create({
   editButtonText: {
     color: "#fff",
     fontWeight: "bold",
-  },
-  actionsContainer: {
-    marginTop: 20,
   },
 });

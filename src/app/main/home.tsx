@@ -1,28 +1,25 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import React from "react";
 import ScreenWrapper from "@/src/components/ScreenWrapper";
-import Button from "@/src/components/Button/Button";
-import { useAuthContext } from "@/src/context/AuthContext";
-import { supabase } from "@/src/lib/supabase";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  NavigationContainer,
-  useNavigationState,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import Icon from "@/assets/icons";
 import { ProfileTab } from "@/src/components/ProfileSection/ProfileTab";
+import { HomeTab } from "@/src/components/HomeTab/HomeTab";
 
 const Tab = createBottomTabNavigator();
 
-const SmallComponent = ({ text }: { text: string }) => (
-  <View>
-    <Text>{text}</Text>
-  </View>
-);
-
-const HomeScreen = () => <SmallComponent text="Home Screen" />;
+const HomeScreen = () => <HomeTab />;
 const ProfileScreen = () => <ProfileTab />;
 
+/**
+ * @component
+ * Home component that serves as the main entry point for the application's home screen.
+ * It uses a tab navigator to switch between the Home and Profile screens.
+ *
+ * @returns {JSX.Element} The rendered Home component.
+ *
+ */
 const Home = () => {
   return (
     <ScreenWrapper>
