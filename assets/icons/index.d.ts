@@ -4,6 +4,9 @@ import Mail from "./Mail";
 import Lock from "./Lock";
 import User from "./User";
 import EditIcon from "./Edit";
+import Heart from "./Heart";
+import Plus from "./Plus";
+import Call from "./Call";
 
 export const icons = {
   home: HomeIcon,
@@ -12,6 +15,9 @@ export const icons = {
   mail: Mail,
   lock: Lock,
   user: User,
+  heart: Heart,
+  plus: Plus,
+  call: Call,
 };
 
 export interface IconProps {
