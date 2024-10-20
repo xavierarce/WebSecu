@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { icons } from "./index.d";
 import { theme } from "@/src/constants/theme";
@@ -9,7 +8,9 @@ export interface IconProps {
   size?: number;
   strokeWidth?: number;
   color?: string;
-  [key: string]: any; // This allows any additional props to be passed
+  [
+    key: string
+  ]: React.SVGProps<SVGSVGElement>[keyof React.SVGProps<SVGSVGElement>];
 }
 
 const Icon: React.FC<IconProps> = ({ name, ...props }) => {
@@ -17,15 +18,13 @@ const Icon: React.FC<IconProps> = ({ name, ...props }) => {
 
   return (
     <IconComponent
+      {...props}
       height={props.size || 24}
       width={props.size || 24}
       strokeWidth={props.strokeWidth || 1.9}
-      color={theme.colors.textLight}
-      {...props}
+      color={props.color || theme.colors.textLight}
     />
   );
 };
 
 export default Icon;
-
-const styles = StyleSheet.create({});
