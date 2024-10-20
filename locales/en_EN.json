@@ -9,6 +9,26 @@
     "login": "Login",
     "sign_up": "Sign Up"
   },
+  "edit-profile": {
+    "title": "Edit Profile",
+    "form": {
+      "title": "Please fill your profile details",
+      "first_name": "Name",
+      "last_name": "Last Name",
+      "email": "E-mail",
+      "phone_number": "Phone number",
+      "number": "Number",
+      "city": "City",
+      "country": "Country",
+      "street": "Street",
+      "postal_code": "Postal code",
+      "bio": "Bio",
+      "save": "Save"
+    },
+    "errors": {
+      "missing_fields": "Please fill in all the fields"
+    }
+  },
   "login-page": {
     "hey": "Hey !",
     "welcome": "Welcome Back",
@@ -32,7 +52,8 @@
     "welcome": "Welcome",
     "please_sign_up": "Please sign up to continue",
     "form": {
-      "name": "Enter your name",
+      "first_name": "Enter your name",
+      "last_name": "Enter your last name",
       "email": "Enter your email",
       "password": "Enter your password",
       "sign_up": "Sign Up"
