@@ -1,9 +1,9 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert } from "react-native";
 import React, { useEffect } from "react";
 import { router, Stack } from "expo-router";
 import { AuthProvider, useAuthContext } from "../context/AuthContext";
 import { supabase } from "../lib/supabase";
-import { getUserData } from "../services/getUserData";
+import { getUserData } from "../services/userService";
 
 const _layout: React.FC = () => {
   return (
@@ -21,9 +21,9 @@ const MainLayout: React.FC = () => {
       (_event, session) => {
         if (session) {
           setAuth({
-            ...session?.user,
             id: session.user?.id || "",
             email: session.user?.email || "",
+            address: null,
           });
           updateUserData(session.user);
           router.replace("/main/home");
@@ -56,5 +56,3 @@ const MainLayout: React.FC = () => {
 };
 
 export default _layout;
-
-const styles = StyleSheet.create({});
