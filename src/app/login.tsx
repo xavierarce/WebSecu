@@ -4,12 +4,11 @@ import { theme } from "../constants/theme";
 import { StatusBar } from "expo-status-bar";
 import ScreenWrapper from "../components/ScreenWrapper";
 import BackButton from "../components/BackButton/BackButton";
-import { router, useRouter } from "expo-router";
+import { router } from "expo-router";
 import { hp, wp } from "../helpers/common";
 import { useTranslation } from "react-i18next";
 import Input from "../components/Input/Input";
 import Icon from "@/assets/icons";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Button from "../components/Button/Button";
 import { supabase } from "../lib/supabase";
 
@@ -25,7 +24,7 @@ const Login = () => {
       return;
     }
 
-    let localEmail = email.trim();
+    const localEmail = email.trim();
     setIsLoading(true);
     try {
       const { error } = await supabase.auth.signInWithPassword({
@@ -42,68 +41,66 @@ const Login = () => {
   };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <ScreenWrapper bg="white">
-        <StatusBar style="dark" />
-        <View style={styles.container}>
-          <BackButton />
+    <ScreenWrapper bg="white">
+      <StatusBar style="dark" />
+      <View style={styles.container}>
+        <BackButton />
 
-          <View>
-            <Text style={styles.welcomeText}>{t("login-page.hey")}</Text>
-            <Text style={styles.welcomeText}>{t("login-page.welcome")}</Text>
-          </View>
-
-          <View style={styles.form}>
-            <Text>{t("login-page.please_login")}</Text>
-            <Input
-              icon={
-                <Icon name="mail" size={26} strokeWidth={1.6} color="black" />
-              }
-              placeholder={t("login-page.form.email")}
-              onChangeText={(e) => setEmail(e)}
-            />
-            <Input
-              icon={
-                <Icon name="lock" size={26} strokeWidth={1.6} color="black" />
-              }
-              secureTextEntry
-              placeholder={t("login-page.form.password")}
-              onChangeText={(e) => setPassword(e)}
-            />
-            <Text style={styles.forgotPassword}>
-              {t("login-page.form.forgot_password")}
-            </Text>
-            <Button
-              title={t("login-page.form.login")}
-              loading={isLoading}
-              onPress={onSubmit}
-            />
-          </View>
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>
-              {t("login-page.footer.dont_have_account")}
-            </Text>
-            <Pressable
-              onPress={() => {
-                router.push("signup" as any);
-              }}
-            >
-              <Text
-                style={[
-                  styles.footerText,
-                  {
-                    color: theme.colors.primaryDark,
-                    fontWeight: theme.fonts.semibold,
-                  },
-                ]}
-              >
-                {t("login-page.footer.sign_up")}
-              </Text>
-            </Pressable>
-          </View>
+        <View>
+          <Text style={styles.welcomeText}>{t("login-page.hey")}</Text>
+          <Text style={styles.welcomeText}>{t("login-page.welcome")}</Text>
         </View>
-      </ScreenWrapper>
-    </GestureHandlerRootView>
+
+        <View style={styles.form}>
+          <Text>{t("login-page.please_login")}</Text>
+          <Input
+            icon={
+              <Icon name="mail" size={26} strokeWidth={1.6} color="black" />
+            }
+            placeholder={t("login-page.form.email")}
+            onChangeText={(e) => setEmail(e)}
+          />
+          <Input
+            icon={
+              <Icon name="lock" size={26} strokeWidth={1.6} color="black" />
+            }
+            secureTextEntry
+            placeholder={t("login-page.form.password")}
+            onChangeText={(e) => setPassword(e)}
+          />
+          <Text style={styles.forgotPassword}>
+            {t("login-page.form.forgot_password")}
+          </Text>
+          <Button
+            title={t("login-page.form.login")}
+            loading={isLoading}
+            onPress={onSubmit}
+          />
+        </View>
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>
+            {t("login-page.footer.dont_have_account")}
+          </Text>
+          <Pressable
+            onPress={() => {
+              router.push("signup" as any);
+            }}
+          >
+            <Text
+              style={[
+                styles.footerText,
+                {
+                  color: theme.colors.primaryDark,
+                  fontWeight: theme.fonts.semibold,
+                },
+              ]}
+            >
+              {t("login-page.footer.sign_up")}
+            </Text>
+          </Pressable>
+        </View>
+      </View>
+    </ScreenWrapper>
   );
 };
 

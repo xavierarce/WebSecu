@@ -9,6 +9,25 @@
     "login": "Connexion",
     "sign_up": "S'inscrire"
   },
+  "edit-profile": {
+    "title": "Modifier le profil",
+    "form": {
+      "title": "Veuillez remplir les détails de votre profil",
+      "first_name": "Prenom",
+      "last_name": "Nom",
+      "email": "E-mail",
+      "phone_number": "Numéro de téléphone",
+      "city": "Ville",
+      "country": "Pays",
+      "street": "Rue",
+      "postal_code": "Code postal",
+      "password": "Mot de passe",
+      "save": "Enregistrer"
+    },
+    "errors": {
+      "missing_fields": "Veuillez remplir tous les champs"
+    }
+  },
   "login-page": {
     "hey": "Salut !",
     "welcome": "Bon retour",

@@ -1,4 +1,4 @@
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import React from "react";
 import { theme } from "@/src/constants/theme";
 import { LoadingProps } from "./Loading.d";
@@ -15,5 +15,3 @@ const Loading: React.FC<LoadingProps> = ({
 };
 
 export default Loading;
-
-const styles = StyleSheet.create({});

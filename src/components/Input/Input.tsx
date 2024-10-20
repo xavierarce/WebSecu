@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import { TextInput } from "react-native-gesture-handler";
 import { theme } from "@/src/constants/theme";
@@ -8,12 +8,12 @@ import { InputProps } from "./Input.d";
 const Input: React.FC<InputProps> = (props) => {
   return (
     <View
-      style={[styles.container, props.containerStyles && props.containerStyles]}
+      style={[styles.container, props.containerStyle && props.containerStyle]}
     >
       {props.icon && props.icon}
       <TextInput
         style={{ flex: 1 }}
-        placeholderTextColor={theme.colors.textLight}
+        placeholderTextColor={"gray"}
         ref={props.inputRef && props.inputRef}
         {...props}
       />

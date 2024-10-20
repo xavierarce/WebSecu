@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { useAuthContext } from "@/src/context/AuthContext";
 import { hp, wp } from "@/src/helpers/common";
 import { theme } from "@/src/constants/theme";

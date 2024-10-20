@@ -7,6 +7,7 @@ import EditIcon from "./Edit";
 import Heart from "./Heart";
 import Plus from "./Plus";
 import Call from "./Call";
+import Camera from "./Camera";
 
 export const icons = {
   home: HomeIcon,
@@ -18,6 +19,7 @@ export const icons = {
   heart: Heart,
   plus: Plus,
   call: Call,
+  camera: Camera,
 };
 
 export interface IconProps {
@@ -25,5 +27,5 @@ export interface IconProps {
   size?: number;
   strokeWidth?: number;
   color?: string;
-  [key: string]: any; // This allows any additional props to be passed
+  [key: string]: unknown; // This allows any additional props to be passed
 }

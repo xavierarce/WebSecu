@@ -1,16 +1,8 @@
-import {
-  Pressable,
-  StyleProp,
-  StyleSheet,
-  Text,
-  TextStyle,
-  View,
-  ViewStyle,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { ButtonProps } from "./Button.d";
 import { theme } from "@/src/constants/theme";
-import { hp, wp } from "@/src/helpers/common";
+import { hp } from "@/src/helpers/common";
 import Loading from "../Loading/Loading";
 
 const Button: React.FC<ButtonProps> = ({

@@ -7,6 +7,7 @@ import { theme } from "../constants/theme";
 import { useTranslation } from "react-i18next";
 import Button from "../components/Button/Button";
 import { useRouter } from "expo-router";
+import gymTrackerImage from "../../assets/images/GYM TRACKER.png";
 
 const tradKey = "welcome-page";
 
@@ -18,10 +19,7 @@ const Welcome = () => {
     <ScreenWrapper>
       <StatusBar style="dark" />
       <View style={styles.container}>
-        <Image
-          style={styles.welcomeImage}
-          source={require("../../assets/images/GYM TRACKER.png")}
-        />
+        <Image style={styles.welcomeImage} source={gymTrackerImage} />
         <View style={{ gap: 20 }}>
           <Text style={styles.title}>{t(`${tradKey}.title`)}</Text>
           <Text style={styles.punchline}>{t(`${tradKey}.punchline`)}</Text>
@@ -29,14 +27,14 @@ const Welcome = () => {
         <View style={styles.footer}>
           <Button
             title={t("welcome-page.get_started")}
-            onPress={() => router.push("signup" as any)}
+            onPress={() => router.push("/signup")}
           />
         </View>
         <View style={styles.buttomTextContiner}>
           <Text style={styles.loginText}>
             {t(`${tradKey}.already_have_account`)}
           </Text>
-          <Pressable onPress={() => router.push("login" as any)}>
+          <Pressable onPress={() => router.push("/login")}>
             <Text style={[styles.loginText, { color: theme.colors.secondary }]}>
               {t(`${tradKey}.login`)}
             </Text>

@@ -1,4 +1,3 @@
-import { StyleSheet } from "react-native";
 import React from "react";
 import ScreenWrapper from "@/src/components/ScreenWrapper";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -48,5 +47,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({});

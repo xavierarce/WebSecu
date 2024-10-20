@@ -1,7 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Image } from "expo-image";
-import getSourceService from "@/src/services/imageSourceService"; // Ensure this path is correct
 import Icon from "@/assets/icons";
 import { theme } from "@/src/constants/theme";
 import { hp, wp } from "@/src/helpers/common";
@@ -40,7 +38,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
             />
             <Pressable
               style={styles.editIcon}
-              onPress={() => router.push("/main/editProfile")}
+              onPress={() => router.push("main/editProfile")}
             >
               <Icon
                 name="edit"
@@ -53,14 +51,14 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         </View>
 
         {/* user info */}
-        <View style={{ alignItems: "center", gap: 4 }}>
+        <View style={{ alignItems: "center", gap: 2 }}>
           <Text style={styles.userName}>{user && user.name}</Text>
           <Text style={styles.infoText}>{user && user?.address}</Text>
         </View>
 
         {/* Bio */}
         <View style={{ gap: 10 }}>
-          <View style={styles.info}>
+          <View style={[styles.info, { marginTop: 10 }]}>
             <Icon name="mail" size={20} color={theme.colors.textDark} />
             <Text style={styles.infoText}>{user && user?.email}</Text>
           </View>
@@ -87,6 +85,7 @@ const styles = StyleSheet.create({
   },
   bodyContainer: {
     flex: 1,
+    gap: 10,
   },
   avatarContainer: {
     height: hp(12),

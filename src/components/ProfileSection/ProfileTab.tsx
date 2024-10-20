@@ -1,24 +1,9 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
-import React, { useState } from "react";
+import React from "react";
+import { StyleSheet, View, Button, Alert } from "react-native";
 import { supabase } from "@/src/lib/supabase"; // Ensure this path is correct
 import { useAuthContext } from "@/src/context/AuthContext"; // Ensure you have this context set up
 import { ProfileHeader } from "./ProfileHeader"; // Ensure this path is correct
 import { useRouter } from "expo-router";
-import { wp } from "@/src/helpers/common";
-
-interface User {
-  name: string;
-  email: string;
-  address: string;
-  avatarUrl?: string;
-}
 
 /**
  * @component
@@ -32,19 +17,19 @@ export const ProfileTab: React.FC = () => {
   const { setAuth } = useAuthContext(); // Use your Auth context to manage authentication state
   const router = useRouter();
 
-  const [user, setUser] = useState<User>({
+  const user = {
     name: "John Doe",
     email: "johndoe@mail.com",
     address: "123 Main St, New York, NY",
     // avatarUrl: "https://api.dicebear.com/7.x/lorelei/svg",
-  });
+  };
 
   const onLogout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
       Alert.alert("Error logging out", error.message);
     } else {
-      setAuth(null); // Update your auth state after successful logout
+      setAuth(null);
     }
   };
 
