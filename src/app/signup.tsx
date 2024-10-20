@@ -4,7 +4,7 @@ import { theme } from "../constants/theme";
 import { StatusBar } from "expo-status-bar";
 import ScreenWrapper from "../components/ScreenWrapper";
 import BackButton from "../components/BackButton/BackButton";
-import { router, useRouter } from "expo-router";
+import { router } from "expo-router";
 import { hp, wp } from "../helpers/common";
 import { useTranslation } from "react-i18next";
 import Input from "../components/Input/Input";
@@ -32,16 +32,13 @@ const SingUp = () => {
       return;
     }
 
-    let local_first_name = name.first_name.trim();
-    let local_last_name = name.last_name.trim();
-    let localEmail = email.trim();
+    const local_first_name = name.first_name.trim();
+    const local_last_name = name.last_name.trim();
+    const localEmail = email.trim();
     setIsLoading(true);
 
     try {
-      const {
-        data: { session },
-        error,
-      } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: localEmail,
         password: password,
         options: {
@@ -89,12 +86,12 @@ const SingUp = () => {
                 icon={
                   <Icon name="user" size={26} strokeWidth={1.6} color="black" />
                 }
-                containerStyles={{ flex: 1, marginRight: 10 }}
+                containerStyle={{ flex: 1, marginRight: 10 }}
                 placeholder={t("sign-up-page.form.first_name")}
                 onChangeText={(e) => setFirstName(e)}
               />
               <Input
-                containerStyles={{ flex: 1 }}
+                containerStyle={{ flex: 1 }}
                 placeholder={t("sign-up-page.form.last_name")}
                 onChangeText={(e) => setLastName(e)}
               />
@@ -124,7 +121,7 @@ const SingUp = () => {
             <Text style={styles.footerText}>
               {t("sign-up-page.footer.already_have_account")}
             </Text>
-            <Pressable onPress={() => router.push("login" as any)}>
+            <Pressable onPress={() => router.push("/login")}>
               <Text
                 style={[
                   styles.footerText,
