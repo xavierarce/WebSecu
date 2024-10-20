@@ -1,9 +1,18 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
+type Address = {
+  number: string;
+  street: string;
+  additional: string;
+  postal_code: string;
+  city: string;
+  country: string;
+};
+
 interface User {
   id: string;
-  email: string;
-  [key: string]: any;
+  address: Address | null;
+  [key: string]: string | number | boolean | null | undefined | Address;
 }
 
 interface AuthContextType {

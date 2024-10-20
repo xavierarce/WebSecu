@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import React from "react";
 import { hp } from "@/src/helpers/common";
 import { theme } from "@/src/constants/theme";
@@ -6,7 +6,7 @@ import { Image } from "expo-image";
 import getSourceService from "@/src/services/imageSourceService";
 
 type AvatarProps = {
-  uri: string;
+  uri: string | null;
   size?: number;
   rounded?: number;
   style?: object;

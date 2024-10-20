@@ -8,5 +8,5 @@ export interface InputProps {
   inputRef?: React.RefObject<TextInput>; // Ref for the TextInput component
   placeholder?: string; // Optional placeholder
   onChangeText?: (text: string) => void; // Optional function to handle text changes
-  [key: string]: any; // To handle additional props dynamically
+  [key: string]: unknown; // To handle additional props dynamically
 }
