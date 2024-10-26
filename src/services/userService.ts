@@ -40,7 +40,10 @@ export const getUserData = async (userId: string) => {
   }
 };
 
-export const updateUser = async (userId: string, data: Partial<User>) => {
+export const updateUser = async (
+  userId: string | null,
+  data: Partial<User>
+) => {
   try {
     const { error } = await supabase
       .from("users")

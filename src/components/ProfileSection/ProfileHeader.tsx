@@ -5,6 +5,7 @@ import { theme } from "@/src/constants/theme";
 import { hp, wp } from "@/src/helpers/common";
 import Header from "../Header/Header";
 import Avatar from "../Avatar/Avatar";
+import { Router } from "expo-router";
 
 interface ProfileHeaderProps {
   user?: {
@@ -15,7 +16,7 @@ interface ProfileHeaderProps {
     phone_number?: string;
     bio?: string;
   };
-  router: any;
+  router: Router;
 }
 
 export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
@@ -24,10 +25,8 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      {/* header quoi */}
       <Header title={"Profile"} mb={30} />
 
-      {/* user Image */}
       <View style={styles.bodyContainer}>
         <View style={{ gap: 15 }}>
           <View style={styles.avatarContainer}>
@@ -38,7 +37,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
             />
             <Pressable
               style={styles.editIcon}
-              onPress={() => router.push("main/editProfile")}
+              onPress={() => router.push("/main/editProfile")}
             >
               <Icon
                 name="edit"
