@@ -2,7 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import Svg, { Path } from "react-native-svg";
 
-const ThreeDotsCircle = (props) => (
+const ThreeDotsCircle = ({ strokeWidth, ...props }) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -15,21 +15,21 @@ const ThreeDotsCircle = (props) => (
     <Path
       d="M11.9959 12H12.0049"
       stroke="currentColor"
-      strokeWidth={props.strokeWidth}
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <Path
       d="M15.9998 12H16.0088"
       stroke="currentColor"
-      strokeWidth={props.strokeWidth}
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <Path
       d="M7.99981 12H8.00879"
       stroke="currentColor"
-      strokeWidth={props.strokeWidth}
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
