@@ -7,9 +7,7 @@ import { InputProps } from "./Input.d";
 
 const Input: React.FC<InputProps> = (props) => {
   return (
-    <View
-      style={[styles.container, props.containerStyle && props.containerStyle]}
-    >
+    <View style={[styles.container, props.containerStyle || {}]}>
       {props.icon && props.icon}
       <TextInput
         style={{ flex: 1 }}

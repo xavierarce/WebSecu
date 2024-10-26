@@ -13,6 +13,11 @@
     "expo-env.d.ts",
     "assets/icons/ArrowLeft.jsx",
     "src/components/BackButton",
-    "src/app/signup.jsx"
+    "src/app/signup.jsx",
+    "assets/icons/index.jsx",
+    "src/app/main/editProfile.jsx",
+    "src/app/main/editProfile.jsx",
+    "src/context/AuthContext.jsx",
+    "src/services/imageSourceService.jsx"
   ]
 }

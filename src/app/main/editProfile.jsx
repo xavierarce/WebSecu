@@ -1,5 +1,5 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ScreenWrapper from "@/src/components/ScreenWrapper";
 import Header from "@/src/components/Header/Header";
 import { hp, wp } from "@/src/helpers/common";
@@ -13,26 +13,7 @@ import { useTranslation } from "react-i18next";
 import Button from "@/src/components/Button/Button";
 import { updateUser } from "@/src/services/userService";
 
-type Address = {
-  number: string;
-  street: string;
-  additional: string;
-  postal_code: string;
-  city: string;
-  country: string;
-};
-
-type FormUser = {
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone_number: string;
-  image: string | null;
-  address: Address;
-  bio: string;
-};
-
-const address: Address = {
+const defaultAddress = {
   number: "",
   street: "",
   additional: "",
@@ -42,39 +23,31 @@ const address: Address = {
 };
 
 const EditProfile = () => {
-  const { user, setUserData } = useAuthContext();
   const { t } = useTranslation();
-  const [loading, setLoading] = React.useState(false);
+  const { user, setUserData } = useAuthContext();
+  const [isAddressOpen, setIsAddressOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const imageSource = getSourceService(user?.image || null);
-  const [formUser, setFormUser] = React.useState<FormUser>({
+  const [formUser, setFormUser] = useState({
     first_name: user?.first_name || "",
     last_name: user?.last_name || "",
     email: user?.email || "",
     phone_number: user?.phone_number || "",
     image: null,
-    address: user?.address || address,
+    address: user?.address || defaultAddress,
     bio: user?.bio || "",
   });
 
   useEffect(() => {
-    if (user) {
-      setFormUser({
-        first_name: user?.first_name || "",
-        last_name: user?.last_name || "",
-        email: user?.email || "",
-        phone_number: user?.phone_number || "",
-        image: user?.image,
-        address: user?.address || address,
-        bio: user?.bio || "",
-      });
-    }
+    console.log(user, "user");
+    if (user) setFormUser(user);
   }, [user]);
 
-  const setInputForm = (key: keyof FormUser, value: string) => {
+  const setInputForm = (key, value) => {
     setFormUser((prev) => ({ ...prev, [key]: value }));
   };
 
-  const setAddressInput = (key: keyof Address, value: string) => {
+  const setAddressInput = (key, value) => {
     setFormUser((prev) => ({
       ...prev,
       address: { ...prev.address, [key]: value },
@@ -85,16 +58,16 @@ const EditProfile = () => {
     const userData = { ...formUser };
     setLoading(true);
 
-    const requiredFields: { [key in keyof FormUser]?: string } = {
+    const requiredFields = {
       first_name: t("edit-profile.form.first_name"),
       last_name: t("edit-profile.form.last_name"),
       email: t("edit-profile.form.email"),
     };
 
     // Collect missing fields
-    const missingFields = (
-      Object.keys(requiredFields) as (keyof FormUser)[]
-    ).filter((key) => !userData[key]);
+    const missingFields = Object.keys(requiredFields).filter(
+      (key) => !userData[key]
+    );
 
     if (missingFields.length > 0) {
       // Display missing fields in the alert
@@ -156,10 +129,15 @@ const EditProfile = () => {
               />
             </View>
 
-            {(
-              ["email", "phone_number", "bio", "address"] as (keyof FormUser)[]
-            ).map((key) => {
+            {["email", "phone_number", "bio", "address"].map((key) => {
               if (key === "address") {
+                const address = formUser?.address || {};
+
+                const fullAddress = Object.keys(defaultAddress)
+                  .filter((key) => address[key]) // Filter out keys with null or undefined values
+                  .map((key) => address[key]) // Map keys to their corresponding values
+                  .join(", "); // Join values with a comma and space
+                console.log(fullAddress, "fullAddress");
                 return (
                   <View
                     key="address"
@@ -168,8 +146,22 @@ const EditProfile = () => {
                       { marginBottom: hp(2), marginTop: hp(2) },
                     ]}
                   >
-                    {(Object.keys(address) as (keyof Address)[]).map(
-                      (addressKey) => (
+                    <View>
+                      <Text>Address inputss</Text>
+                      <Text>{fullAddress || "-"}</Text>
+                      <Button
+                        buttonStyle={{ backgroundColor: "red" }}
+                        title={t(
+                          `edit-profile.form.${
+                            !isAddressOpen ? "open" : "close"
+                          }-edit-address`
+                        )}
+                        loading={loading}
+                        onPress={() => setIsAddressOpen(true)}
+                      />
+                    </View>
+                    {isAddressOpen &&
+                      Object.keys(defaultAddress).map((addressKey) => (
                         <Input
                           key={addressKey}
                           containerStyles={{ marginTop: hp(1) }}
@@ -177,8 +169,7 @@ const EditProfile = () => {
                           onChangeText={(e) => setAddressInput(addressKey, e)}
                           value={formUser.address[addressKey]}
                         />
-                      )
-                    )}
+                      ))}
                   </View>
                 );
               }
