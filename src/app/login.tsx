@@ -81,11 +81,7 @@ const Login = () => {
           <Text style={styles.footerText}>
             {t("login-page.footer.dont_have_account")}
           </Text>
-          <Pressable
-            onPress={() => {
-              router.push("signup" as any);
-            }}
-          >
+          <Pressable onPress={() => router.push("/signup")}>
             <Text
               style={[
                 styles.footerText,
