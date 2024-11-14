@@ -18,6 +18,11 @@
     "src/app/main/editProfile.jsx",
     "src/app/main/editProfile.jsx",
     "src/context/AuthContext.jsx",
-    "src/services/imageSourceService.jsx"
+    "src/services/imageService.jsx",
+    "src/app/_layout.jsx",
+    "src/app/welcome.jsx",
+    "src/app/_layout.jsx",
+    "src/app/welcome.jsx",
+    "src/app/login.jsx"
   ]
 }

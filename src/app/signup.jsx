@@ -1,5 +1,5 @@
 import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { theme } from "../constants/theme";
 import { StatusBar } from "expo-status-bar";
 import ScreenWrapper from "../components/ScreenWrapper";
@@ -12,9 +12,11 @@ import Icon from "@/assets/icons";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Button from "../components/Button/Button";
 import { supabase } from "../lib/supabase";
+import { useAuthContext } from "../context/AuthContext";
 
 const SingUp = () => {
   const { t } = useTranslation();
+  const { user } = useAuthContext();
   const [name, setName] = useState({
     first_name: "",
     last_name: "",
@@ -22,6 +24,10 @@ const SingUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (user) router.replace("/main/home");
+  }, [user]);
 
   const onSubmit = async () => {
     if (!email || !password || !name.first_name || !name.last_name) {
@@ -53,15 +59,15 @@ const SingUp = () => {
       if (error) Alert.alert("SingUp", error.message);
       setIsLoading(false);
     } catch (error) {
-      Alert.alert("SingUp", `${(error as Error).message} - 500`);
+      Alert.alert("SingUp", `${error.message} - 500`);
       setIsLoading(false);
     }
   };
 
-  const setFirstName = (e: string) => {
+  const setFirstName = (e) => {
     setName({ ...name, first_name: e });
   };
-  const setLastName = (e: string) => {
+  const setLastName = (e) => {
     setName({ ...name, last_name: e });
   };
 
@@ -121,7 +127,7 @@ const SingUp = () => {
             <Text style={styles.footerText}>
               {t("sign-up-page.footer.already_have_account")}
             </Text>
-            <Pressable onPress={() => router.push("/login")}>
+            <Pressable onPress={() => router.replace("/login")}>
               <Text
                 style={[
                   styles.footerText,

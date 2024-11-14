@@ -1,5 +1,5 @@
 import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { theme } from "../constants/theme";
 import { StatusBar } from "expo-status-bar";
 import ScreenWrapper from "../components/ScreenWrapper";
@@ -11,12 +11,18 @@ import Input from "../components/Input/Input";
 import Icon from "@/assets/icons";
 import Button from "../components/Button/Button";
 import { supabase } from "../lib/supabase";
+import { useAuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const { t } = useTranslation();
+  const { user } = useAuthContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (user) router.replace("/main/home");
+  }, [user]);
 
   const onSubmit = async () => {
     if (!email || !password) {
@@ -34,7 +40,7 @@ const Login = () => {
 
       if (error) Alert.alert("Login", error.message);
     } catch (error) {
-      Alert.alert("Login", `${(error as Error).message} - 500`);
+      Alert.alert("Login", `${error.message} - 500`);
     }
 
     setIsLoading(false);
@@ -81,7 +87,7 @@ const Login = () => {
           <Text style={styles.footerText}>
             {t("login-page.footer.dont_have_account")}
           </Text>
-          <Pressable onPress={() => router.push("/signup")}>
+          <Pressable onPress={() => router.replace("/signup")}>
             <Text
               style={[
                 styles.footerText,

@@ -20,22 +20,22 @@ export const getUserData = async (userId: string) => {
   try {
     const { data, error } = await supabase
       .from("users")
-      .select("*") // Replace '*' with specific columns if necessary
+      .select("*")
       .eq("id", userId)
-      .single(); // Fetch a single row
+      .single();
 
     if (error) {
-      console.log("error", error.message);
+      console.error("error", error.message);
       return { success: false, message: error.message };
     } else {
       return { success: true, data };
     }
   } catch (error) {
     if (error instanceof Error) {
-      console.log("error", error.message);
+      console.error("error", error.message);
       return { success: false, message: error.message };
     }
-    console.log("Unknown error", error);
+    console.error("Unknown error", error);
     return { success: false, message: "An unknown error occurred." };
   }
 };
@@ -51,17 +51,17 @@ export const updateUser = async (
       .eq("id", userId);
 
     if (error) {
-      console.log("error", error.message);
+      console.error("error", error.message);
       return { success: false, message: error.message };
     } else {
       return { success: true, data };
     }
   } catch (error) {
     if (error instanceof Error) {
-      console.log("error", error.message);
+      console.error("error", error.message);
       return { success: false, message: error.message };
     }
-    console.log("Unknown error", error);
+    console.error("Unknown error", error);
     return { success: false, message: "An unknown error occurred." };
   }
 };

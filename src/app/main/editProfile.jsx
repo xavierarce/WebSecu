@@ -6,28 +6,20 @@ import { hp, wp } from "@/src/helpers/common";
 import { theme } from "@/src/constants/theme";
 import { Image } from "expo-image";
 import { useAuthContext } from "@/src/context/AuthContext";
-import getSourceService from "@/src/services/imageSourceService";
 import Icon from "@/assets/icons";
 import Input from "@/src/components/Input/Input";
 import { useTranslation } from "react-i18next";
 import Button from "@/src/components/Button/Button";
 import { updateUser } from "@/src/services/userService";
-
-const defaultAddress = {
-  number: "",
-  street: "",
-  additional: "",
-  postal_code: "",
-  city: "",
-  country: "",
-};
+import { AddressInput } from "@/src/components/EditAddress/EditAddress";
+import * as ImagePicker from "expo-image-picker";
+import { getImageSource, uploadFile } from "@/src/services/imageService";
+import { defaultAddress } from "@/src/services/formatFunctions";
 
 const EditProfile = () => {
   const { t } = useTranslation();
   const { user, setUserData } = useAuthContext();
-  const [isAddressOpen, setIsAddressOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const imageSource = getSourceService(user?.image || null);
   const [formUser, setFormUser] = useState({
     first_name: user?.first_name || "",
     last_name: user?.last_name || "",
@@ -38,8 +30,12 @@ const EditProfile = () => {
     bio: user?.bio || "",
   });
 
+  const imageSource =
+    formUser?.image && typeof formUser.image === "object"
+      ? formUser.image.uri
+      : getImageSource(user?.image);
+
   useEffect(() => {
-    console.log(user, "user");
     if (user) setFormUser(user);
   }, [user]);
 
@@ -54,7 +50,6 @@ const EditProfile = () => {
     }));
   };
   const onSubmit = async () => {
-    console.log(formUser, "formUser");
     const userData = { ...formUser };
     setLoading(true);
 
@@ -64,13 +59,17 @@ const EditProfile = () => {
       email: t("edit-profile.form.email"),
     };
 
-    // Collect missing fields
+    if (userData.image && typeof userData.image === "object") {
+      const res = await uploadFile("profile", userData.image.uri, true);
+      if (res.success) userData.image = res.data;
+      else userData.image = null;
+    }
+
     const missingFields = Object.keys(requiredFields).filter(
       (key) => !userData[key]
     );
 
     if (missingFields.length > 0) {
-      // Display missing fields in the alert
       const missingFieldNames = missingFields
         .map((key) => requiredFields[key])
         .join(", ");
@@ -84,10 +83,20 @@ const EditProfile = () => {
     if (res.success) setUserData({ ...user, ...userData });
 
     setLoading(false);
-    console.log(res, "res");
   };
 
-  const onPickImage = () => {};
+  const onPickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setFormUser({ ...formUser, image: result.assets[0] });
+    }
+  };
 
   return (
     <ScreenWrapper bg="white">
@@ -131,46 +140,13 @@ const EditProfile = () => {
 
             {["email", "phone_number", "bio", "address"].map((key) => {
               if (key === "address") {
-                const address = formUser?.address || {};
-
-                const fullAddress = Object.keys(defaultAddress)
-                  .filter((key) => address[key]) // Filter out keys with null or undefined values
-                  .map((key) => address[key]) // Map keys to their corresponding values
-                  .join(", "); // Join values with a comma and space
-                console.log(fullAddress, "fullAddress");
                 return (
-                  <View
-                    key="address"
-                    style={[
-                      styles.form,
-                      { marginBottom: hp(2), marginTop: hp(2) },
-                    ]}
-                  >
-                    <View>
-                      <Text>Address inputss</Text>
-                      <Text>{fullAddress || "-"}</Text>
-                      <Button
-                        buttonStyle={{ backgroundColor: "red" }}
-                        title={t(
-                          `edit-profile.form.${
-                            !isAddressOpen ? "open" : "close"
-                          }-edit-address`
-                        )}
-                        loading={loading}
-                        onPress={() => setIsAddressOpen(true)}
-                      />
-                    </View>
-                    {isAddressOpen &&
-                      Object.keys(defaultAddress).map((addressKey) => (
-                        <Input
-                          key={addressKey}
-                          containerStyles={{ marginTop: hp(1) }}
-                          placeholder={t(`edit-profile.form.${addressKey}`)}
-                          onChangeText={(e) => setAddressInput(addressKey, e)}
-                          value={formUser.address[addressKey]}
-                        />
-                      ))}
-                  </View>
+                  <AddressInput
+                    key={key}
+                    setAddressInput={setAddressInput}
+                    formUser={formUser}
+                    loading={loading}
+                  />
                 );
               }
 

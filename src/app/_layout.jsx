@@ -5,7 +5,7 @@ import { AuthProvider, useAuthContext } from "../context/AuthContext";
 import { supabase } from "../lib/supabase";
 import { getUserData } from "../services/userService";
 
-const _layout: React.FC = () => {
+const _layout = () => {
   return (
     <AuthProvider>
       <MainLayout />
@@ -13,7 +13,7 @@ const _layout: React.FC = () => {
   );
 };
 
-const MainLayout: React.FC = () => {
+const MainLayout = () => {
   const { setAuth, setUserData } = useAuthContext();
 
   useEffect(() => {
@@ -23,13 +23,12 @@ const MainLayout: React.FC = () => {
           setAuth({
             id: session.user?.id || "",
             email: session.user?.email || "",
-            address: null,
           });
           updateUserData(session.user);
           router.replace("/main/home");
         } else {
           setAuth(null);
-          router.replace("/welcome");
+          router.replace({ pathname: "/welcome" });
         }
       }
     );
@@ -39,7 +38,7 @@ const MainLayout: React.FC = () => {
     };
   }, []);
 
-  const updateUserData = async (user: { id: string }) => {
+  const updateUserData = async (user) => {
     const { success, message, data } = await getUserData(user.id);
 
     if (success) setUserData(data);

@@ -12,6 +12,8 @@
   "edit-profile": {
     "title": "Edit Profile",
     "form": {
+      "open-edit-address": "Edit Address",
+      "cancel-edit-address": "Annuler",
       "title": "Please fill your profile details",
       "first_name": "Name",
       "last_name": "Last Name",
