@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const ScreenWrapper = ({ children, bg = "transparent" }) => {
+const ScreenWrapper = ({ children = null, bg = "transparent" }) => {
   const { top } = useSafeAreaInsets();
 
   const paddingTop = top > 0 ? top + 5 : 20;
@@ -22,9 +22,4 @@ export default ScreenWrapper;
 ScreenWrapper.propTypes = {
   children: PropTypes.node,
   bg: PropTypes.string,
-};
-
-ScreenWrapper.defaultProps = {
-  children: null,
-  bg: "transparent",
 };

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Svg, { Path } from "react-native-svg";
 
-const Search = ({ strokeWidth, ...props }) => (
+const Search = ({ strokeWidth = 2, ...props }) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -32,8 +32,4 @@ export default Search;
 
 Search.propTypes = {
   strokeWidth: PropTypes.number,
-};
-
-Search.defaultProps = {
-  strokeWidth: 2,
 };

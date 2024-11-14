@@ -26,7 +26,3 @@ export default Call;
 Call.propTypes = {
   strokeWidth: PropTypes.number,
 };
-
-Call.defaultProps = {
-  strokeWidth: 2,
-};
