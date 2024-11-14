@@ -3,7 +3,7 @@ import React from "react";
 import { hp } from "@/src/helpers/common";
 import { theme } from "@/src/constants/theme";
 import { Image } from "expo-image";
-import getSourceService from "@/src/services/imageSourceService";
+import { getImageSource } from "@/src/services/imageService";
 
 type AvatarProps = {
   uri: string | null;
@@ -20,7 +20,7 @@ const Avatar: React.FC<AvatarProps> = ({
 }) => {
   return (
     <Image
-      source={getSourceService(uri)}
+      source={getImageSource(uri)}
       transition={100}
       style={[
         styles.avatar,

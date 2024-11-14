@@ -14,15 +14,8 @@ import { useRouter } from "expo-router";
  * @returns {React.FC} A React functional component that displays the user's profile and a logout button.
  */
 export const ProfileTab: React.FC = () => {
-  const { setAuth } = useAuthContext(); // Use your Auth context to manage authentication state
+  const { user, setAuth } = useAuthContext(); // Use your Auth context to manage authentication state
   const router = useRouter();
-
-  const user = {
-    name: "John Doe",
-    email: "johndoe@mail.com",
-    address: "123 Main St, New York, NY",
-    // avatarUrl: "https://api.dicebear.com/7.x/lorelei/svg",
-  };
 
   const onLogout = async () => {
     const { error } = await supabase.auth.signOut();

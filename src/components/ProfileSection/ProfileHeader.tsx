@@ -6,6 +6,7 @@ import { hp, wp } from "@/src/helpers/common";
 import Header from "../Header/Header";
 import Avatar from "../Avatar/Avatar";
 import { Router } from "expo-router";
+import { formatAddress } from "@/src/services/formatFunctions";
 
 interface ProfileHeaderProps {
   user?: {
@@ -52,7 +53,9 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         {/* user info */}
         <View style={{ alignItems: "center", gap: 2 }}>
           <Text style={styles.userName}>{user && user.name}</Text>
-          <Text style={styles.infoText}>{user && user?.address}</Text>
+          <Text style={styles.infoText}>
+            {user && formatAddress(user?.address)}
+          </Text>
         </View>
 
         {/* Bio */}
