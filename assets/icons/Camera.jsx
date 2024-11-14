@@ -45,7 +45,3 @@ export default Camera;
 Camera.propTypes = {
   strokeWidth: PropTypes.number,
 };
-
-Camera.defaultProps = {
-  strokeWidth: 2,
-};

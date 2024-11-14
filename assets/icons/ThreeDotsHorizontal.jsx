@@ -2,7 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import Svg, { Path } from "react-native-svg";
 
-const ThreeDotsHorizontal = ({ strokeWidth, ...props }) => (
+const ThreeDotsHorizontal = ({ strokeWidth = 2, ...props }) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -40,8 +40,4 @@ export default ThreeDotsHorizontal;
 
 ThreeDotsHorizontal.propTypes = {
   strokeWidth: PropTypes.number,
-};
-
-ThreeDotsHorizontal.defaultProps = {
-  strokeWidth: 2,
 };

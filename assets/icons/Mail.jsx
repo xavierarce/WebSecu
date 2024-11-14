@@ -2,7 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import Svg, { Path } from "react-native-svg";
 
-const Mail = ({ strokeWidth, ...props }) => (
+const Mail = ({ strokeWidth = 2, ...props }) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -31,8 +31,4 @@ export default Mail;
 
 Mail.propTypes = {
   strokeWidth: PropTypes.number,
-};
-
-Mail.defaultProps = {
-  strokeWidth: 2,
 };

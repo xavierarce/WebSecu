@@ -2,7 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import Svg, { Path } from "react-native-svg";
 
-const Lock = ({ strokeWidth, ...props }) => (
+const Lock = ({ strokeWidth = 2, ...props }) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -37,8 +37,4 @@ export default Lock;
 
 Lock.propTypes = {
   strokeWidth: PropTypes.number,
-};
-
-Lock.defaultProps = {
-  strokeWidth: 2,
 };
