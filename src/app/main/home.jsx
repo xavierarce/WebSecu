@@ -5,11 +5,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import Icon from "@/assets/icons";
 import { ProfileTab } from "@/src/components/ProfileSection/ProfileTab";
 import { HomeTab } from "@/src/components/HomeTab/HomeTab";
+import { WorkoutsTab } from "@/src/components/WorkoutsSection/Workouts";
 
 const Tab = createBottomTabNavigator();
 
 const HomeScreen = () => <HomeTab />;
 const ProfileScreen = () => <ProfileTab />;
+const WorkoutsScreen = () => <WorkoutsTab />;
 
 /**
  * @component
@@ -30,6 +32,16 @@ const Home = () => {
             options={{
               headerShown: false,
               tabBarIcon: () => <Icon name="home" size={24} color="black" />,
+            }}
+          />
+          <Tab.Screen
+            name="Workouts"
+            component={WorkoutsScreen}
+            options={{
+              headerShown: false,
+              tabBarIcon: () => (
+                <Icon name="dumbbell" size={24} color="black" />
+              ),
             }}
           />
           <Tab.Screen

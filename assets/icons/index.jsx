@@ -12,6 +12,8 @@ import Heart from "./Heart";
 import Plus from "./Plus";
 import Call from "./Call";
 import Camera from "./Camera";
+import Map from "./Map";
+import Dumbbell from "./Dumbbell";
 
 export const icons = {
   home: HomeIcon,
@@ -24,6 +26,8 @@ export const icons = {
   plus: Plus,
   call: Call,
   camera: Camera,
+  map: Map,
+  dumbbell: Dumbbell,
 };
 
 const Icon = ({
