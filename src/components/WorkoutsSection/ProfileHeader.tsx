@@ -50,16 +50,17 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
           </View>
         </View>
 
+        {/* user info */}
+        <View style={{ alignItems: "center", gap: 2 }}>
+          <Text style={styles.userName}>{user && user.name}</Text>
+          <Text style={styles.infoText}>
+            {user && formatAddress(user?.address)}
+          </Text>
+        </View>
+
         {/* Bio */}
         <View style={{ gap: 10 }}>
           <View style={[styles.info, { marginTop: 10 }]}>
-            <Icon name="map" size={20} color={theme.colors.textDark} />
-            <Text style={styles.infoText}>
-              {user && formatAddress(user?.address)}
-            </Text>
-          </View>
-
-          <View style={[styles.info]}>
             <Icon name="mail" size={20} color={theme.colors.textDark} />
             <Text style={styles.infoText}>{user && user?.email}</Text>
           </View>

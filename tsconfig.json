@@ -23,6 +23,8 @@
     "src/app/welcome.jsx",
     "src/app/_layout.jsx",
     "src/app/welcome.jsx",
-    "src/app/login.jsx"
+    "src/app/login.jsx",
+    "src/app/main/home.jsx",
+    "src/components/WorkoutsSection/Workouts.jsx"
   ]
 }
