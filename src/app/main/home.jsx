@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ScreenWrapper from "@/src/components/ScreenWrapper";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import Icon from "@/assets/icons";
 import { ProfileTab } from "@/src/components/ProfileSection/ProfileTab";
 import { HomeTab } from "@/src/components/HomeTab/HomeTab";
-import { WorkoutsTab } from "@/src/components/WorkoutsSection/Workouts";
+import { ProgramsTab } from "@/src/components/ProgramsSection/Programs";
+import { CalendarTab } from "@/src/components/CalendarSection/CalendarTab";
+import { router } from "expo-router";
 
 const Tab = createBottomTabNavigator();
 
 const HomeScreen = () => <HomeTab />;
 const ProfileScreen = () => <ProfileTab />;
-const WorkoutsScreen = () => <WorkoutsTab />;
+const ProgramsScreen = () => <ProgramsTab />;
+const CalendarScreen = () => <CalendarTab />;
 
 /**
  * @component
@@ -22,12 +25,15 @@ const WorkoutsScreen = () => <WorkoutsTab />;
  *
  */
 const Home = () => {
+  useEffect(() => {
+    router.push("main/program");
+  }, []);
   return (
     <ScreenWrapper>
       <NavigationContainer independent>
         <Tab.Navigator>
           <Tab.Screen
-            name="Home"
+            name="Dashboard"
             component={HomeScreen}
             options={{
               headerShown: false,
@@ -35,12 +41,32 @@ const Home = () => {
             }}
           />
           <Tab.Screen
-            name="Workouts"
-            component={WorkoutsScreen}
+            name="Workout"
+            component={ProgramsScreen}
             options={{
               headerShown: false,
               tabBarIcon: () => (
                 <Icon name="dumbbell" size={24} color="black" />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Calendar"
+            component={CalendarScreen}
+            options={{
+              headerShown: false,
+              tabBarIcon: () => (
+                <Icon name="calendar" size={24} color="black" />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Programs"
+            component={ProgramsScreen}
+            options={{
+              headerShown: false,
+              tabBarIcon: () => (
+                <Icon name="programs" size={24} color="black" />
               ),
             }}
           />

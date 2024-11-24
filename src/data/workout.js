@@ -1,0 +1,50 @@
+export default {
+  workout_id: 1,
+  user_id: 101,
+  name: "Full Body Strength",
+  description:
+    "A full-body strength workout using compound movements to target all major muscle groups.",
+  difficulty: "Advanced",
+  exercises: [
+    {
+      exercise_id: 1,
+      name: "Squat",
+      sets: 4,
+      reps: 8,
+      duration: null,
+      order: 1,
+    },
+    {
+      exercise_id: 2,
+      name: "Bench Press",
+      sets: 4,
+      reps: 8,
+      duration: null,
+      order: 2,
+    },
+    {
+      exercise_id: 3,
+      name: "Deadlift",
+      sets: 3,
+      reps: 6,
+      duration: null,
+      order: 3,
+    },
+    {
+      exercise_id: 4,
+      name: "Pull-Up",
+      sets: 3,
+      reps: 8,
+      duration: null,
+      order: 4,
+    },
+    {
+      exercise_id: 5,
+      name: "Overhead Press",
+      sets: 3,
+      reps: 8,
+      duration: null,
+      order: 5,
+    },
+  ],
+};
