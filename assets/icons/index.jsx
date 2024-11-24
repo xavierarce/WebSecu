@@ -14,6 +14,8 @@ import Call from "./Call";
 import Camera from "./Camera";
 import Map from "./Map";
 import Dumbbell from "./Dumbbell";
+import Calendar from "./Calendar";
+import Programs from "./Programs";
 
 export const icons = {
   home: HomeIcon,
@@ -28,6 +30,8 @@ export const icons = {
   camera: Camera,
   map: Map,
   dumbbell: Dumbbell,
+  calendar: Calendar,
+  programs: Programs,
 };
 
 const Icon = ({
